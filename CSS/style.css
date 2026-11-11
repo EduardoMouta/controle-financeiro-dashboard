@@ -1,0 +1,280 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --bg-color: #111827;
+    --card-bg: #1f2937;
+
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+
+    --text-color: #f9fafb;
+    --text-muted: #9ca3af;
+
+    --danger-color: #ef4444;
+    --success-color: #10b981;
+
+    --border-color: #374151;
+}
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 20px;
+}
+
+input, select {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+input::placeholder {
+    color: var(--text-muted);
+}
+
+/* HEADER E LAYOUT */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #f9fafb;
+    margin-bottom: 5px;
+}
+
+header p {
+    color: var(--text-muted);
+}
+
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Estilo padrão para os Cards */
+.card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+/* SEÇÃO DO DASHBOARD E CARDS DE MÉTRICAS */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.config-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    flex: 1; /* Faz o grupo de input/botão ocupar o espaço disponível */
+    min-width: 250px; /* Garante que não esmague demasiado */
+}
+
+.input-group input {
+    flex: 1; /* Faz o input crescer e preencher todo o espaço livre ao lado do botão */
+    min-width: 0; /* Truque essencial do Flexbox para evitar que o input estoure o contentor */
+}
+
+/* Garante que o texto do botão nunca quebre de linha */
+#btn-salvar-renda {
+    white-space: nowrap; 
+    padding: 10px 16px;
+}
+
+/* CSS Grid para colocar as métricas em 4 colunas */
+.cards-resumo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 10PX;
+}
+
+.metric span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.metric h2 {
+    margin-top: 10px;
+    font-size: 1.5rem;
+}
+
+/*FORMULÁRIO DE ADIÇÃO DE GASTOS */
+.form-container {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.form-container h3 {
+    margin-bottom: 15px;
+}
+
+#form-transacao {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.field label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Estilo unificado para Inputs, Selects e Botões */
+input, select, button {
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--primary-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* TABELA DE HISTÓRICO DE GASTOS */
+.tabela-container {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.tabela-container h3 {
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: #111827;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+tr.vazio td {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px;
+}
+
+/* Botão de Excluir dentro da Tabela (estilizado dinamicamente depois) */
+.btn-excluir {
+    background-color: transparent;
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    border-radius: 4px;
+}
+
+.btn-excluir:hover {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* Torna o bloco da tabela responsivo com scroll horizontal no mobile */
+.tabela-container {
+    width: 100%;
+    overflow-x: auto; /* Cria uma barra de rolagem suave apenas na tabela se faltar espaço */
+    -webkit-overflow-scrolling: touch; /* Melhora a rolagem em dispositivos touch/iOS */
+}
+
+/* Garante que a tabela tenha uma largura mínima para não espremer demais as colunas */
+table {
+    min-width: 500px; 
+}
+
+
+/* Conteúdo disponível para leitores de tela,
+   mas visualmente oculto */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Destaque de navegação por teclado */
+.card.metric:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+/* Destaque sutil nos cards */
+.card.metric {
+    transition: border-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.card.metric:hover {
+    border-color: var(--primary-color);
+}
+
+tbody tr:not(.vazio):hover {
+    background-color: #273449;
+}
+
+.card.metric:hover {
+    transform: translateY(-2px);
+}
